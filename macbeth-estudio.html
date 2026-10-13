@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Macbeth · Guía de estudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E6E9E4; --surface:#F4F6F2; --ink:#1D2623; --muted:#56635D; --line:#C3CAC3;
+  --heather:#5B4769; --heather-soft:#E4DCEA; --ok:#2B6747; --ok-soft:#D8EBDF; --bad:#9B2C2C; --bad-soft:#F3DADA;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121917; --surface:#1B2421; --ink:#E3E8E2; --muted:#9AA7A0; --line:#2E3A36;
+    --heather:#C4AED4; --heather-soft:#2B2433; --ok:#86CFA6; --ok-soft:#1B3328; --bad:#EA9090; --bad-soft:#3A2020;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121917; --surface:#1B2421; --ink:#E3E8E2; --muted:#9AA7A0; --line:#2E3A36;
+  --heather:#C4AED4; --heather-soft:#2B2433; --ok:#86CFA6; --ok-soft:#1B3328; --bad:#EA9090; --bad-soft:#3A2020;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.5}
+.wrap{max-width:46rem;margin:0 auto;padding:1.25rem 1rem 3rem}
+h1,h2,h3{font-family:"IM Fell English",Georgia,"Times New Roman",serif;font-weight:400;line-height:1.15;margin:0}
+header{padding:1rem 0 .5rem}
+h1{font-size:clamp(2.6rem,11vw,4rem);letter-spacing:.01em}
+.sub{color:var(--muted);margin:.35rem 0 0;max-width:34rem}
+nav.tabs{display:flex;gap:.25rem;margin:1.25rem 0 1rem;border-bottom:1px solid var(--line)}
+nav.tabs button{flex:1;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-weight:700;padding:.7rem .25rem;cursor:pointer;min-height:44px}
+nav.tabs button[aria-selected="true"]{color:var(--heather);border-bottom-color:var(--heather)}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--heather);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1rem}
+.chip{font:inherit;font-size:.92rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem;cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--heather);border-color:var(--heather);color:var(--bg)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:0 0 1rem;color:var(--muted);font-size:.95rem}
+.link{background:none;border:0;color:var(--heather);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:.4rem 0;min-height:40px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem}
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:.8rem}
+.bar span{display:block;height:100%;background:var(--heather);transition:width .25s}
+.meta{color:var(--muted);font-size:.9rem;margin:0 0 .6rem}
+.qtext{font-size:1.45rem;margin:0 0 1rem}
+.opts{display:grid;gap:.55rem}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:.8rem .9rem;cursor:pointer;min-height:48px}
+.opt:hover:not(:disabled){border-color:var(--heather)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.dim{opacity:.6}
+.answer{margin-top:1rem;padding-top:.8rem;border-top:1px dashed var(--line)}
+.answer .key{font-size:.85rem;color:var(--ok);font-weight:700;margin:0 0 .25rem}
+.answer .exp{font-size:.95rem;color:var(--muted);margin:0}
+.row{display:flex;gap:.6rem;justify-content:space-between;align-items:center;margin-top:1rem;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:.7rem 1.1rem;cursor:pointer;min-height:46px}
+.btn.alt{background:none;color:var(--ink);border:1.5px solid var(--line)}
+.score{font-family:"IM Fell English",Georgia,serif;font-size:3.4rem;line-height:1;margin:.3rem 0}
+.fails{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
+.fails li{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;font-size:.95rem}
+.fails small{display:block;color:var(--ok);font-weight:700;margin-top:.15rem}
+.card{min-height:15rem;display:flex;flex-direction:column;justify-content:center;text-align:center;cursor:pointer;width:100%;font:inherit;color:var(--ink)}
+.card .front{font-family:"IM Fell English",Georgia,serif;font-size:1.9rem;line-height:1.2}
+.card .hint{color:var(--muted);font-size:.85rem;margin-top:.8rem}
+.card .back{font-size:1.05rem;text-align:left}
+.card.flipped{border-color:var(--heather);background:var(--heather-soft)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem}
+summary{cursor:pointer;padding:.9rem 1rem;font-family:"IM Fell English",Georgia,serif;font-size:1.3rem;min-height:48px}
+details .body{padding:0 1rem 1rem;color:var(--ink)}
+details ul{padding-left:1.1rem;margin:.4rem 0}
+details li{margin:.3rem 0}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Macbeth</h1>
+    <p class="sub">Guía de estudio interactiva: preguntas tipo examen, tarjetas y resumen por actos.</p>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" id="t-quiz" aria-selected="true" data-tab="quiz">Cuestionario</button>
+    <button role="tab" id="t-cards" aria-selected="false" data-tab="cards">Tarjetas</button>
+    <button role="tab" id="t-sum" aria-selected="false" data-tab="sum">Resumen</button>
+  </nav>
+  <main>
+    <section id="quiz"></section>
+    <section id="cards" class="hidden"></section>
+    <section id="sum" class="hidden"></section>
+  </main>
+</div>
+
+<script>
+/* ---------- DATOS: preguntas [categoría, pregunta, correcta, mala1, mala2, mala3, explicación] ---------- */
+const CATS = {all:"Todas",a1:"Acto I",a2:"Acto II",a3:"Acto III",a4:"Acto IV",a5:"Acto V",p:"Personajes",c:"Citas",t:"Temas"};
+const QS = [
+["a1","¿Qué anticipa el lema de las brujas “Fair is foul, and foul is fair”?","La inversión de valores: lo bueno y lo malo se confunden","Que la batalla ya fue ganada","Que Macbeth será un rey justo","Un hechizo para curar a los heridos","Plantea desde la primera escena el tema de la apariencia contra la realidad y la ambigüedad moral."],
+["a1","¿Dónde y con quién acuerdan encontrarse las brujas en la escena I?","En el páramo (heath), con Macbeth","En el castillo de Inverness, con Duncan","En el bosque de Birnam, con Banquo","En Fife, con Macduff","Dicen “Upon the heath… there to meet with Macbeth”, cuando termine la batalla."],
+["a1","¿Qué cuenta el sargento herido sobre Macbeth?","Que mató a Macdonwald y clavó su cabeza en las almenas","Que huyó de la batalla contra Noruega","Que traicionó al rey junto al thane de Cawdor","Que fue capturado por los rebeldes","Macbeth aparece como héroe valiente y brutal: abrió a Macdonwald “from the nave to the chaps”."],
+["a1","¿Qué pasa con el thane de Cawdor, que ayudó a Noruega?","Duncan ordena ejecutarlo y da su título a Macbeth","Duncan lo perdona","Es desterrado a Irlanda","Muere en batalla ante Macbeth","Duncan dice que “there's no art to find the mind's construction in the face”: confió en un traidor, ironía que se repetirá con Macbeth."],
+["a1","¿Cuáles son las tres profecías de las brujas a Macbeth?","Thane de Glamis, thane de Cawdor y futuro rey","Rey, conquistador de Inglaterra y padre de reyes","Thane de Fife, de Ross y rey","Invencible, inmortal y rey","Macbeth ya era thane de Glamis; lo de Cawdor se cumple enseguida (Ross y Angus), lo que da credibilidad a “king hereafter”."],
+["a1","¿Qué le profetizan las brujas a Banquo?","Será menor y mayor que Macbeth y engendrará reyes sin serlo","Será rey antes que Macbeth","Morirá en batalla","Perderá a su hijo","“Lesser than Macbeth, and greater… thou shalt get kings, though thou be none.”"],
+["a1","¿Qué advierte Banquo sobre las profecías (“instruments of darkness”)?","Que el mal dice pequeñas verdades para llevarnos a la perdición","Que las brujas son mensajeras de Dios","Que mienten siempre","Que hay que contárselas al rey","Banquo ve el peligro; Macbeth no le hace caso. Es un contraste entre ambos."],
+["a1","¿Cómo reacciona Macbeth ante el nombramiento de Malcolm como Príncipe de Cumberland?","Lo ve como un obstáculo que debe superar","Lo celebra sinceramente","Se lo cuenta a Banquo","Renuncia a su ambición","Dice en un aparte: “that is a step on which I must fall down, or else o'erleap”, y pide a las estrellas que oculten sus “black and deep desires”."],
+["a1","¿Qué teme Lady Macbeth de la naturaleza de su marido al leer la carta?","Que sea “too full o' the milk of human kindness” para tomar el camino rápido","Que sea demasiado cruel","Que sea cobarde en la guerra","Que ame más a Banquo que a ella","Cree que tiene ambición pero le falta “the illness” (la maldad) que debe acompañarla."],
+["a1","¿Qué significa “Unsex me here” (Lady Macbeth)?","Pide perder su compasión “femenina” para poder ser cruel","Quiere convertirse literalmente en hombre","Pide perdón a los espíritus","Pide que Duncan no llegue","Invoca a los espíritus para que la llenen de crueldad y bloqueen el remordimiento; relaciona crueldad y masculinidad."],
+["a1","¿Qué consejo da Lady Macbeth con “Look like the innocent flower, but be the serpent under't”?","Aparentar inocencia mientras se prepara el crimen","Ser sincero con Duncan","Evitar a los invitados","Confesar a Banquo","Es el tema central de apariencia vs. realidad, hipocresía y engaño."],
+["a1","En su soliloquio (I.vii), ¿cuál es la única razón que Macbeth admite para matar a Duncan?","La “vaulting ambition” (ambición desmedida)","La venganza","El miedo a Banquo","Una orden de las brujas","Enumera razones en contra: es su pariente, su súbdito y su anfitrión, y Duncan es un rey virtuoso."],
+["a1","¿Cómo convence Lady Macbeth a su marido de seguir adelante?","Cuestionando su hombría y su coraje","Amenazándolo con delatarlo","Ofreciéndole dinero","Mostrándole una nueva profecía","Dice “Art thou afeard to be the same in thine own act and valour as thou art in desire?” y “screw your courage to the sticking-place”."],
+["a1","¿Cuál es el plan para matar a Duncan?","Emborrachar a los guardias y culparlos usando sus propias dagas","Envenenar la cena del rey","Atacarlo durante una cacería","Pagar a asesinos externos","Los chamberlains cargarán con la culpa. Macbeth admira su “undaunted mettle”."],
+
+["a2","¿Qué regalo envía Duncan a Lady Macbeth?","Un diamante","Una corona","Una espada","Una carta","Lo trae Banquo; muestra la generosidad y confianza de Duncan, que ignora la traición."],
+["a2","¿Qué ve Macbeth justo antes de matar a Duncan?","Una daga flotando con el mango hacia su mano","El fantasma de Banquo","A las tres brujas","Un bosque en movimiento","“Is this a dagger which I see before me?” es una “dagger of the mind”: refleja su culpa, su tensión y su atracción hacia el crimen."],
+["a2","¿Cuál es la señal para que Macbeth vaya a matar a Duncan?","Una campana que toca Lady Macbeth","Un trueno","El grito de un búho","Una antorcha encendida","“I go, and it is done; the bell invites me.”"],
+["a2","¿Por qué Lady Macbeth no mata ella misma a Duncan?","Porque dormido le recordó a su padre","Porque no tenía daga","Porque Macbeth se lo prohibió","Porque temió a los guardias","“Had he not resembled my father as he slept, I had done't.” Muestra que no es del todo despiadada."],
+["a2","¿Qué voz dice Macbeth haber oído tras el asesinato?","“Sleep no more! Macbeth does murder sleep”","“Macbeth shall be king”","“Beware Macduff”","“Fair is foul”","El insomnio simboliza su culpa y la pérdida de inocencia. Tampoco pudo decir “Amen”."],
+["a2","¿Qué error comete Macbeth tras el crimen y cómo lo repara Lady Macbeth?","Se lleva las dagas; ella las devuelve y mancha a los guardias","Deja la puerta abierta; ella la cierra","Despierta a Donalbain; ella lo calma","Pierde su corona; ella la busca","Lo llama “infirm of purpose”. “The sleeping and the dead are but as pictures.”"],
+["a2","¿Qué contraste hay entre “Will all great Neptune's ocean wash this blood clean from my hand?” y “A little water clears us of this deed”?","Macbeth siente culpa profunda; Lady Macbeth la minimiza (por ahora)","Ambos están tranquilos","Ambos sienten pánico","Macbeth minimiza y ella siente culpa","Más tarde se invierte: ella sufre con “Out, damned spot!”."],
+["a2","¿Cuál es la función del Portero (Porter) en II.iii?","Alivio cómico y hacer del castillo una “puerta del infierno”; habla del equívoco","Avisar a Duncan de la llegada de Macduff","Delatar a Macbeth","Presentar a Hécate","Menciona al “equivocator” (tema clave) y rompe la tensión antes del descubrimiento del cadáver."],
+["a2","¿Quién descubre el cuerpo de Duncan?","Macduff","Lennox","Banquo","Ross","Exclama “O horror, horror, horror!” y hace sonar la alarma."],
+["a2","¿Por qué mata Macbeth a los guardias?","Dice que fue por furia leal, pero elimina testigos","Porque confesaron","Porque Malcolm lo ordenó","Porque intentaron huir","Su explicación (“the expedition of my violent love outrun the pauser, reason”) resulta sospechosa."],
+["a2","¿Por qué huyen Malcolm y Donalbain y adónde van?","Temen por su vida: Malcolm a Inglaterra, Donalbain a Irlanda","Para formar un ejército en Noruega","Por orden de Macbeth","Para buscar a las brujas","Su huida los hace sospechosos y abre el camino de Macbeth al trono. “There's daggers in men's smiles.”"],
+["a2","¿Dónde es coronado Macbeth y adónde va Macduff?","Macbeth en Scone; Macduff a Fife","Macbeth en Inverness; Macduff a Scone","Macbeth en Forres; Macduff a Inglaterra","Macbeth en Dunsinane; Macduff a Colmekill","Macduff no asiste a la coronación: primera señal de desconfianza."],
+["a2","¿Qué presagios antinaturales acompañan la muerte de Duncan?","Día oscuro, un halcón matado por un búho y caballos que se devoran","Lluvia de sangre","Un eclipse de luna","Un terremoto en Inverness","El regicidio rompe el orden natural y la naturaleza reacciona (también chimeneas caídas y gritos en el aire)."],
+
+["a3","¿Qué sospecha Banquo al comienzo del Acto III?","Que Macbeth jugó sucio para ser rey","Que Malcolm es culpable","Que Lady Macbeth es bruja","Que Fleance lo traicionará","“Thou play'dst most foully for't”. Pero también empieza a esperar que la profecía sobre sus descendientes se cumpla."],
+["a3","¿Por qué ve Macbeth a Banquo como una amenaza?","Por la profecía de que sus hijos serán reyes y por su sabiduría y valor","Porque Banquo quiere el trono ya","Porque Banquo sabe del crimen por Lady Macbeth","Porque Banquo se unió a Malcolm","Macbeth siente que tiene una “fruitless crown” y “barren sceptre”: mató a Duncan solo para beneficiar a los herederos de Banquo."],
+["a3","¿Qué argumento usa Macbeth para convencer a los asesinos?","Que Banquo es la causa de sus desgracias y deben probar su hombría","Una gran recompensa en oro","Una orden del rey Duncan","Una profecía de las brujas","Usa de nuevo el tema de la hombría (“in the catalogue ye go for men”) y manipula su resentimiento."],
+["a3","¿Qué ocurre en el asesinato de Banquo?","Banquo muere y Fleance escapa","Mueren Banquo y Fleance","Banquo escapa y Fleance muere","Ambos escapan","“Fly, good Fleance, fly… Thou mayst revenge.” El escape de Fleance mantiene viva la profecía."],
+["a3","¿Qué le dice Macbeth a su esposa sobre el plan contra Banquo?","Que sea “innocent of the knowledge” hasta aplaudir el hecho","Que ayude a ejecutarlo","Que lo advierta","Nada, porque ella lo planeó","Cambio de dinámica: Macbeth empieza a actuar solo y a excluir a Lady Macbeth."],
+["a3","¿Qué ocurre en el banquete (III.iv)?","Macbeth ve el fantasma de Banquo sentado en su lugar","Macduff acusa a Macbeth","Lady Macbeth confiesa","Llega Malcolm con un ejército","Solo Macbeth lo ve y se descontrola ante los lores. Lady Macbeth intenta calmar a los invitados."],
+["a3","¿Qué excusa da Lady Macbeth a los invitados?","Que Macbeth sufre ese mal desde joven","Que está borracho","Que recibió malas noticias","Que es un ritual escocés","A Macbeth le dice “Are you a man?” y compara su visión con la “air-drawn dagger”."],
+["a3","¿Qué significa “I am in blood stepp'd in so far…”?","Que es tan tarde que seguir matando es más fácil que volver atrás","Que se arrepiente y quiere parar","Que quiere confesar","Que se siente seguro","Marca el punto de no retorno de Macbeth."],
+["a3","¿Qué hace sospechar a Macbeth de Macduff?","No asistió al banquete; Macbeth tiene un espía pagado en cada casa","Lo vio con Malcolm","Se negó a coronarlo","Intentó matarlo","Decide volver con las brujas: “by the worst means, the worst”."],
+["a3","¿Qué reprocha Hécate a las brujas y qué planea?","No haberla incluido; crear ilusiones que lleven a Macbeth a confiarse","Haber matado a Banquo; castigarlas","Haber hablado con Duncan; encerrarlas","Haber matado cerdos; expulsarlas","“Security is mortals' chiefest enemy”: el exceso de confianza será la ruina de Macbeth."],
+["a3","¿Qué hace Lennox en III.vi?","Habla con ironía sobre Macbeth y se entera de que Macduff está con Malcolm en Inglaterra","Defiende sinceramente a Macbeth","Delata a Macduff","Mata a Fleance","La oposición se organiza con ayuda de Inglaterra, Siward y Northumberland."],
+
+["a4","¿Qué dicen las tres apariciones del caldero?","Cabeza armada: cuídate de Macduff; niño sangrante: nadie nacido de mujer te dañará; niño coronado con un árbol: no caerás hasta que Birnam suba a Dunsinane","Pasado, presente y futuro de Macbeth","Los nombres de los tres asesinos","La muerte de Lady Macbeth","Son profecías de doble sentido (equívoco) que dan una falsa seguridad."],
+["a4","¿Qué muestra la cuarta visión?","Ocho reyes descendientes de Banquo","La muerte de Macbeth","La coronación de Malcolm","El fantasma de Duncan","Banquo sonríe y los señala como suyos: su linaje reinará."],
+["a4","¿Qué decide Macbeth al saber que Macduff huyó a Inglaterra?","Atacar su castillo y matar a su familia","Perdonarlo","Enviar un embajador","Pedir ayuda a Hécate","“The very firstlings of my heart shall be the firstlings of my hand”: ahora actúa sin dudar."],
+["a4","En IV.ii, ¿cómo interpreta Lady Macduff la huida de su marido?","Como traición y falta de amor","Como acto de sabiduría","Como un viaje de negocios","Como una orden del rey","Ross dice que pudo ser sabiduría o miedo. El hijo de Macduff muere defendiendo a su padre."],
+["a4","¿Por qué finge Malcolm ser vicioso ante Macduff?","Para comprobar su lealtad y que no sea un espía de Macbeth","Para burlarse de él","Porque realmente lo es","Para huir a Irlanda","Se dice lujurioso, avaro y sin virtudes; la reacción de Macduff lo convence de su honradez."],
+["a4","¿Qué contraste ofrece el rey Edward de Inglaterra?","Es un rey santo que cura la “evil”, frente al tirano Macbeth","Es cruel como Macbeth","Es débil","Es aliado de Macbeth","Representa el buen gobierno y la legitimidad divina."],
+["a4","¿Cómo reacciona Macduff al saber que su familia fue asesinada?","Siente el dolor como hombre y jura venganza","Se queda impasible","Culpa a Malcolm","Regresa a pedir clemencia","“I must also feel it as a man.” Malcolm: “let grief convert to anger”."],
+["a4","¿Quién dice “Give sorrow words; the grief that does not speak whispers the o'er-fraught heart and bids it break”?","Malcolm","Macduff","Ross","Siward","Se lo dice a Macduff cuando recibe la noticia."],
+
+["a5","¿Qué hace Lady Macbeth sonámbula (V.i)?","Se frota las manos y revive el crimen: “Out, damned spot!”","Escribe una confesión pública","Habla con Banquo y huye","Intenta salir del castillo","Menciona a Duncan, a Banquo y a Lady Macduff. El doctor dice “more needs she the divine than the physician”."],
+["a5","¿Quiénes observan a Lady Macbeth sonámbula?","Un doctor y su dama de compañía","Seyton y Lennox","Macduff y Ross","Macbeth y el portero","Hablan de que las “infected minds” descargan sus secretos en la almohada."],
+["a5","¿En qué confía Macbeth antes de la batalla final?","En las profecías: Birnam y “nadie nacido de mujer”","En su ejército","En Hécate","En Seyton","Su exceso de confianza (hubris): “I cannot taint with fear”."],
+["a5","¿Qué ordena Malcolm a sus soldados en Birnam?","Cortar una rama cada uno para camuflar su número","Quemar el bosque","Esperar a la noche","Retirarse","Así “el bosque se mueve” y la profecía se cumple en un sentido que Macbeth no esperaba."],
+["a5","¿Qué expresa Macbeth con “Tomorrow, and tomorrow, and tomorrow…”?","Que la vida no tiene sentido: “a tale told by an idiot… signifying nothing”","Que mañana ganará la batalla","Que espera ver a Lady Macbeth","Que se arrepiente","Lo dice al saber la muerte de la reina; refleja desilusión y nihilismo."],
+["a5","¿Cómo murió Lady Macbeth según Malcolm al final?","Por su propia mano","Asesinada por Macduff","En batalla","De una enfermedad común","Malcolm dice que “by self and violent hands took off her life”. Su muerte se anuncia con “a cry of women”."],
+["a5","¿Qué hace perder a Macbeth su confianza ante Macduff?","Macduff nació por cesárea (“untimely ripp'd”)","Se quedó sin armas","Vio el fantasma de Banquo","Macduff trajo un ejército","Macbeth: “be these juggling fiends no more believed, that palter with us in a double sense”."],
+["a5","¿Qué le pasa a Young Siward y cómo lo recibe su padre?","Muere a manos de Macbeth; su padre lo acepta como muerte honrosa","Sobrevive","Mata a Macbeth","Traiciona a Malcolm","Siward pregunta si tenía heridas al frente: “God's soldier be he!”"],
+["a5","¿Cómo termina la obra?","Macduff mata y decapita a Macbeth; Malcolm es proclamado rey y crea condes","Macbeth se suicida","Macduff es coronado","Fleance es coronado","Malcolm invita a todos a su coronación en Scone: se restaura el orden."],
+
+["p","¿Quién es Fleance?","Hijo de Banquo, que escapa del asesinato","Hijo de Macduff","Hijo de Duncan","Hijo de Siward","Su supervivencia mantiene la profecía de los reyes descendientes de Banquo."],
+["p","¿Quién es Seyton?","Asistente de Macbeth que le anuncia la muerte de la reina","El portero del castillo","Un asesino","Un médico","Aparece en V.iii y V.v."],
+["p","¿Quién es Hécate?","Diosa de la brujería que reprende a las brujas","Reina de Escocia","Madre de Macbeth","Una de las tres brujas","Aparece en III.v y IV.i."],
+["p","¿Quién es Siward?","Conde de Northumberland, general inglés aliado de Malcolm","Rey de Noruega","Hermano de Macduff","Médico de Macbeth","Su hijo, Young Siward, muere luchando contra Macbeth."],
+["p","¿Qué papel cumplen Ross y Angus?","Thanes escoceses que llevan noticias","Asesinos de Banquo","Guardias de Duncan","Hijos de Macduff","Anuncian a Macbeth que es thane de Cawdor; Ross trae después la noticia de la matanza de la familia de Macduff."],
+["p","¿Quién es Macdonwald?","El rebelde derrotado por Macbeth al inicio","El rey de Noruega","Un amigo de Banquo","El padre de Macduff","Contaba con kerns y gallowglasses de las islas occidentales."],
+["p","¿Quién es Sweno?","Rey de Noruega que paga para poder enterrar a sus muertos","Thane de Fife","Capitán de Macbeth","Tío de Malcolm","Pide “composition” tras ser derrotado."],
+["p","¿Qué papel cumple Banquo frente a Macbeth?","Es su contraste: oye las profecías pero resiste la tentación","Es el villano principal","Es un asesino","Es una bruja","Ambos reciben profecías, pero Banquo no actúa contra el rey."],
+["p","¿Quién es Macduff en la obra?","El thane de Fife que enfrenta y mata a Macbeth","Hijo de Duncan","Aliado de Macbeth","Uno de los asesinos","Es el instrumento de la justicia y nació “untimely ripp'd”."],
+
+["c","¿Quién dice “Something wicked this way comes”?","La segunda bruja","Macbeth","Hécate","Lady Macbeth","Lo dice al ver llegar a Macbeth (IV.i)."],
+["c","¿Quién dice “There's daggers in men's smiles”?","Donalbain","Malcolm","Banquo","Macduff","Habla de la desconfianza tras el asesinato de Duncan."],
+["c","¿Quién dice “Nothing in his life became him like the leaving it”?","Malcolm","Duncan","Ross","Banquo","Habla de cómo murió el thane de Cawdor."],
+["c","¿Quién dice “All the perfumes of Arabia will not sweeten this little hand”?","Lady Macbeth","El Doctor","Macbeth","Lady Macduff","Escena del sonambulismo (V.i)."],
+["c","¿Quién dice “Stars, hide your fires; let not light see my black and deep desires”?","Macbeth","Lady Macbeth","Banquo","Hécate","Es un aparte de Macbeth tras el nombramiento de Malcolm."],
+["c","¿Quién dice “Lay on, Macduff, and damn'd be him that first cries ‘Hold, enough!’”?","Macbeth","Siward","Malcolm","Young Siward","Macbeth decide luchar hasta el final, aun sabiendo que fue engañado."],
+["c","¿Quién dice “What's done is done”?","Lady Macbeth","Macbeth","Banquo","Ross","Lo dice en III.ii intentando calmar a Macbeth. En V.i dirá: “What's done cannot be undone”."],
+["c","¿Quién dice “If it were done when 'tis done, then 'twere well it were done quickly”?","Macbeth","Lady Macbeth","Banquo","Malcolm","Inicio de su soliloquio de duda antes del asesinato."],
+["c","¿Quién dice “O horror, horror, horror!”?","Macduff","Macbeth","Lennox","Banquo","Al descubrir a Duncan muerto."],
+["c","¿Quién dice “False face must hide what the false heart doth know”?","Macbeth","Lady Macbeth","Duncan","Banquo","Cierra I.vii; resume el tema de apariencia vs. realidad."],
+
+["t","¿Cuál es el tema principal de Macbeth?","La ambición desmedida y sus consecuencias","El amor romántico","La amistad","La riqueza","Macbeth y su esposa caen por la “vaulting ambition”."],
+["t","¿Qué simboliza la sangre en la obra?","Culpa y violencia que no se pueden borrar","Valentía","Realeza","Pureza","“Will these hands ne'er be clean?”"],
+["t","¿Qué simboliza el sueño y el insomnio?","Conciencia culpable e inocencia perdida","El cansancio de la guerra","El poder de las brujas","La vejez","Macbeth “does murder sleep”; Lady Macbeth camina dormida."],
+["t","¿Qué contraste temático es clave en la obra?","Apariencia vs. realidad","Ciudad vs. campo","Juventud vs. vejez","Riqueza vs. pobreza","“Fair is foul”, “look like the innocent flower”."],
+["t","¿Qué tensión plantea la obra entre destino y libre albedrío?","Las brujas predicen, pero Macbeth elige actuar","Todo está decidido y nadie elige","Las brujas controlan a Macbeth","No hay profecías","Es uno de los debates más frecuentes en los exámenes."],
+["t","¿Qué papel tiene la masculinidad (“man”) en la obra?","Se usa para manipular: ser hombre equivale a ser violento","No es un tema","Solo importa en la guerra","Solo importa para Macduff","Lady Macbeth, Macbeth y Macduff discuten qué significa ser “a man”."],
+["t","¿Qué es el equívoco (equivocation)?","Lenguaje de doble sentido que engaña, como las profecías","Una forma de poesía","Un tipo de armadura","Un título noble","Aparece en el Portero y en las palabras de las brujas."],
+["t","¿Qué efecto tiene la oscuridad y la noche?","Esconde el mal y acompaña el crimen","Anuncia la paz","Representa la sabiduría","Es solo ambientación","“Stars, hide your fires”, “Come, thick night”."],
+["t","¿Qué tipo de héroe es Macbeth?","Héroe trágico con una falla fatal (hamartia): la ambición","Héroe cómico","Villano plano","Héroe épico sin defectos","Es noble al inicio y cae por sus decisiones; los soliloquios mantienen cierta empatía."],
+["t","¿Qué ejemplifican las “borrowed robes”?","Un título que no le pertenece y no le queda bien","Ropa prestada de Banquo","Una armadura","Un disfraz de bruja","La imagen de la ropa: “a giant's robe upon a dwarfish thief”."],
+["t","¿Qué representa la oposición entre orden natural y antinatural?","El regicidio rompe el orden y la naturaleza reacciona","Las brujas ordenan la naturaleza","La naturaleza no importa","Solo hay tormentas","Se relaciona con la idea del derecho divino de los reyes."]
+];
+
+/* ---------- DATOS: tarjetas [mazo, frente, reverso] ---------- */
+const DECKS = {pj:"Personajes",ci:"Citas",te:"Temas y símbolos",es:"Escenas clave"};
+const CARDS = [
+["pj","Macbeth","Valiente general escocés, thane de Glamis y luego de Cawdor. Mata a Duncan por ambición y cae en la tiranía. Héroe trágico."],
+["pj","Lady Macbeth","Esposa de Macbeth. Lo empuja al crimen cuestionando su hombría. Más tarde la culpa la destruye (sonambulismo) y muere."],
+["pj","Banquo","General amigo de Macbeth. Recibe la profecía de que sus descendientes serán reyes. Es asesinado por orden de Macbeth."],
+["pj","Duncan","Rey de Escocia, bondadoso y confiado. Es asesinado en el castillo de Macbeth."],
+["pj","Malcolm","Hijo mayor de Duncan, Príncipe de Cumberland. Huye a Inglaterra, prueba a Macduff y finalmente es rey."],
+["pj","Donalbain","Hijo menor de Duncan. Huye a Irlanda tras el asesinato."],
+["pj","Macduff","Thane de Fife. Descubre el cadáver de Duncan, no apoya a Macbeth, su familia es asesinada y al final lo mata."],
+["pj","Lady Macduff y su hijo","Asesinados por orden de Macbeth en Fife. Muestran la crueldad del tirano."],
+["pj","Fleance","Hijo de Banquo. Escapa del ataque; garantiza que la profecía siga viva."],
+["pj","Las tres brujas (weird sisters)","Dan las profecías. Ambiguas: no obligan a Macbeth, solo lo tientan. Hablan con equívocos."],
+["pj","Hécate","Diosa de la brujería. Se enoja con las brujas y prepara ilusiones para llevar a Macbeth a la confianza excesiva."],
+["pj","El Portero","Alivio cómico en II.iii. Se imagina portero del infierno; menciona el “equivocator”."],
+["pj","Ross, Lennox, Angus","Thanes escoceses. Ross lleva noticias (Cawdor, matanza de Macduff). Lennox habla con ironía de Macbeth."],
+["pj","Siward y Young Siward","Conde de Northumberland y su hijo. Ayudan a Malcolm; el hijo muere ante Macbeth, el padre lo acepta con honor."],
+["pj","Seyton","Asistente de Macbeth. Anuncia que la reina ha muerto."],
+["pj","Doctor y Dama de compañía","Observan el sonambulismo de Lady Macbeth. El doctor: “More needs she the divine than the physician”."],
+["ci","“Fair is foul, and foul is fair”","Las brujas (I.i). Inversión moral y apariencia vs. realidad."],
+["ci","“Look like the innocent flower, but be the serpent under't”","Lady Macbeth (I.v). Hipocresía y engaño para ocultar el crimen."],
+["ci","“Is this a dagger which I see before me?”","Macbeth (II.i). Alucinación que refleja su culpa y su decisión de matar."],
+["ci","“Macbeth does murder sleep”","Macbeth (II.ii). El insomnio como castigo de la conciencia."],
+["ci","“Out, damned spot! out, I say!”","Lady Macbeth (V.i). Culpa que no se puede lavar."],
+["ci","“I am in blood stepp'd in so far…”","Macbeth (III.iv). Punto sin retorno."],
+["ci","“Double, double toil and trouble”","Las brujas (IV.i). Hechizo del caldero; ritmo de encantamiento."],
+["ci","“Tomorrow, and tomorrow, and tomorrow…”","Macbeth (V.v). La vida sin sentido; reacción a la muerte de su esposa."],
+["ci","“Screw your courage to the sticking-place”","Lady Macbeth (I.vii). Lo anima a seguir con el plan."],
+["ci","“Stars, hide your fires”","Macbeth (I.iv). Oscuridad para esconder sus deseos."],
+["te","Ambición","Motor de la tragedia: “vaulting ambition, which o'erleaps itself”."],
+["te","Apariencia vs. realidad","Falsas caras, equívocos, profecías engañosas, Duncan confiado en Cawdor y Macbeth."],
+["te","Culpa y conciencia","Sangre en las manos, insomnio, alucinaciones (daga, fantasma de Banquo), sonambulismo."],
+["te","Destino vs. libre albedrío","Las brujas profetizan, pero Macbeth decide actuar. Debate clásico de examen."],
+["te","Masculinidad","“Are you a man?”: usada para presionar a Macbeth, a los asesinos y a Macduff."],
+["te","Orden natural y antinatural","El regicidio rompe el orden: noche en pleno día, caballos que se devoran, tormentas."],
+["te","Equívoco (equivocation)","Doble sentido que engaña: bosque de Birnam y “nadie nacido de mujer”."],
+["te","Imágenes de ropa","“Borrowed robes”, “a giant's robe upon a dwarfish thief”: título que no le queda."],
+["te","Sangre, oscuridad y sueño","Símbolos recurrentes: crimen, culpa y pérdida de paz."],
+["es","I.i – Las brujas","Escena breve. Pactan encontrarse con Macbeth. “Fair is foul…”"],
+["es","I.iii – Profecías","Las brujas saludan a Macbeth y a Banquo. Ross y Angus confirman lo de Cawdor."],
+["es","I.vii – Soliloquio","Macbeth duda; Lady Macbeth lo convence."],
+["es","II.i–II.ii – El asesinato","Visión de la daga y muerte de Duncan fuera de escena. Lady Macbeth devuelve las dagas."],
+["es","II.iii – El Portero","Comedia y descubrimiento del cadáver por Macduff."],
+["es","III.iii–III.iv – Banquo y el banquete","Asesinato de Banquo, Fleance escapa y fantasma de Banquo."],
+["es","IV.i – El caldero","Brujas, tres apariciones y los ocho reyes."],
+["es","IV.ii – Fife","Asesinato de Lady Macduff y su hijo."],
+["es","IV.iii – Inglaterra","Prueba de Malcolm a Macduff y noticia de la matanza."],
+["es","V.i – El sonambulismo","Lady Macbeth revive el crimen."],
+["es","V.v – Muerte de la reina","“Tomorrow, and tomorrow…” y la noticia del bosque en movimiento."],
+["es","V.viii – Final","Macduff mata a Macbeth. Malcolm es rey."]
+];
+
+/* ---------- DATOS: resumen ---------- */
+const SUM = [
+["Acto I – Profecía y tentación",[
+ "Las brujas anuncian que se encontrarán con Macbeth. Macbeth y Banquo vencen a los rebeldes; Duncan condena a Cawdor y da su título a Macbeth.",
+ "Las brujas profetizan que Macbeth será rey y que los hijos de Banquo lo serán. Cawdor se confirma de inmediato.",
+ "Duncan nombra heredero a Malcolm. Lady Macbeth, tras la carta, invoca a los espíritus (“unsex me here”) y presiona a Macbeth.",
+ "Tras dudar (soliloquio I.vii), Macbeth acepta el plan de matar a Duncan."]],
+["Acto II – El asesinato",[
+ "Visión de la daga y señal de la campana. Macbeth mata a Duncan; Lady Macbeth coloca las dagas y mancha a los guardias.",
+ "El Portero abre la puerta. Macduff descubre el cadáver y Macbeth mata a los guardias.",
+ "Malcolm y Donalbain huyen y quedan como sospechosos. Macbeth es coronado en Scone."]],
+["Acto III – La caída moral",[
+ "Banquo sospecha. Macbeth, temeroso de la profecía, contrata asesinos. Mueren Banquo pero Fleance escapa.",
+ "En el banquete aparece el fantasma de Banquo y Macbeth pierde el control. Decide visitar de nuevo a las brujas.",
+ "Hécate prepara ilusiones. Lennox muestra la oposición creciente y que Macduff está en Inglaterra."]],
+["Acto IV – Falsa seguridad",[
+ "Las apariciones dan tres profecías engañosas y la visión de los ocho reyes de Banquo.",
+ "Macbeth manda matar a la familia de Macduff.",
+ "Malcolm prueba a Macduff; llega la noticia de la matanza. Inglaterra presta 10.000 hombres con Siward."]],
+["Acto V – Derrota y orden restaurado",[
+ "Lady Macbeth sonámbula revela su culpa. Macbeth sigue confiando en las profecías.",
+ "Muere la reina. El bosque de Birnam “avanza” (ramas como camuflaje).",
+ "Young Siward muere. Macduff revela que nació por cesárea y mata a Macbeth. Malcolm es rey."]]
+];
+
+/* ---------- UTILIDADES ---------- */
+const $ = s => document.querySelector(s);
+const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* ---------- TABS ---------- */
+document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-tab]').forEach(x => x.setAttribute('aria-selected', x === b ? 'true' : 'false'));
+  ['quiz','cards','sum'].forEach(id => $('#'+id).classList.toggle('hidden', id !== b.dataset.tab));
+}));
+
+/* ---------- CUESTIONARIO ---------- */
+const quiz = {cat:'all', mix:true, list:[], i:0, score:0, done:false, failed:[], answered:false, finished:false};
+
+function buildQuestion(row){
+  const [cat,q,right,w1,w2,w3,exp] = row;
+  return {cat,q,right,exp,opts:shuffle([{t:right,ok:true},{t:w1},{t:w2},{t:w3}])};
+}
+function startQuiz(source){
+  const pool = source || QS.filter(r => quiz.cat === 'all' || r[0] === quiz.cat);
+  quiz.list = (quiz.mix ? shuffle(pool) : pool).map(buildQuestion);
+  quiz.i = 0; quiz.score = 0; quiz.failed = []; quiz.answered = false; quiz.finished = false;
+  renderQuiz();
+}
+function renderChips(){
+  return '<div class="chips" role="group" aria-label="Filtrar por tema">' +
+    Object.entries(CATS).map(([k,v]) => `<button class="chip" data-cat="${k}" aria-pressed="${quiz.cat===k}">${v}${k==='all'?` (${QS.length})`:` (${QS.filter(r=>r[0]===k).length})`}</button>`).join('') + '</div>';
+}
+function renderQuiz(){
+  const el = $('#quiz');
+  const head = renderChips() + `<div class="toolbar"><label><input type="checkbox" id="mix" ${quiz.mix?'checked':''}> Mezclar preguntas</label><button class="link" id="restart">Reiniciar</button></div>`;
+  let body = '';
+  if(quiz.finished){
+    const n = quiz.list.length, pct = Math.round(100*quiz.score/n);
+    body = `<div class="panel"><p class="meta">Resultado</p><div class="score">${quiz.score} / ${n}</div><p>${pct>=80?'Muy bien: ya dominas esta parte.':pct>=60?'Buen avance, repasa lo fallado.':'Vale la pena repasar y repetir.'}</p>
+      ${quiz.failed.length?`<h3>Para repasar</h3><ul class="fails">${quiz.failed.map(f=>`<li>${esc(f.q)}<small>Correcta: ${esc(f.right)}</small></li>`).join('')}</ul>`:''}
+      <div class="row">${quiz.failed.length?'<button class="btn" id="retry">Repetir las falladas</button>':''}<button class="btn alt" id="again">Empezar de nuevo</button></div></div>`;
+  } else {
+    const q = quiz.list[quiz.i], n = quiz.list.length;
+    body = `<div class="panel"><div class="bar"><span style="width:${100*quiz.i/n}%"></span></div>
+      <p class="meta">Pregunta ${quiz.i+1} de ${n} · ${CATS[q.cat]}</p>
+      <h2 class="qtext">${esc(q.q)}</h2>
+      <div class="opts">${q.opts.map((o,idx)=>`<button class="opt" data-i="${idx}">${esc(o.t)}</button>`).join('')}</div>
+      <div id="reveal"></div>
+      <div class="row"><button class="link" id="peek">Ver respuesta</button><button class="btn hidden" id="next">${quiz.i+1===n?'Ver resultado':'Siguiente'}</button></div></div>`;
+  }
+  el.innerHTML = head + body;
+
+  el.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { quiz.cat = b.dataset.cat; startQuiz(); });
+  $('#mix').onchange = e => { quiz.mix = e.target.checked; startQuiz(); };
+  $('#restart').onclick = () => startQuiz();
+  if(quiz.finished){
+    $('#again').onclick = () => startQuiz();
+    const r = $('#retry'); if(r) r.onclick = () => { const f = quiz.failed.map(x => QS.find(row => row[1] === x.q)); startQuiz(f); };
+    return;
+  }
+  const q = quiz.list[quiz.i];
+  const showAnswer = (chosen) => {
+    if(quiz.answered) return;
+    quiz.answered = true;
+    const btns = el.querySelectorAll('.opt');
+    btns.forEach((b,idx) => { b.disabled = true; if(q.opts[idx].ok) b.classList.add('ok'); else if(idx === chosen) b.classList.add('bad'); else b.classList.add('dim'); });
+    if(chosen === undefined){ /* solo miró */ quiz.failed.push(q); }
+    else if(q.opts[chosen].ok) quiz.score++;
+    else quiz.failed.push(q);
+    $('#reveal').innerHTML = `<div class="answer"><p class="key">Respuesta correcta: ${esc(q.right)}</p><p class="exp">${esc(q.exp)}</p></div>`;
+    $('#peek').classList.add('hidden');
+    $('#next').classList.remove('hidden');
+    $('#next').focus();
+  };
+  el.querySelectorAll('.opt').forEach(b => b.onclick = () => showAnswer(+b.dataset.i));
+  $('#peek').onclick = () => showAnswer(undefined);
+  $('#next').onclick = () => { quiz.answered = false; if(quiz.i+1 >= quiz.list.length) quiz.finished = true; else quiz.i++; renderQuiz(); window.scrollTo({top:0}); };
+}
+
+/* ---------- TARJETAS ---------- */
+const fc = {deck:'pj', list:[], i:0, flipped:false};
+function loadDeck(k, mix){ fc.deck = k; let l = CARDS.filter(c => c[0] === k); fc.list = mix ? shuffle(l) : l; fc.i = 0; fc.flipped = false; renderCards(); }
+function renderCards(){
+  const el = $('#cards'), c = fc.list[fc.i];
+  el.innerHTML = `<div class="chips" role="group" aria-label="Mazo">${Object.entries(DECKS).map(([k,v])=>`<button class="chip" data-deck="${k}" aria-pressed="${fc.deck===k}">${v}</button>`).join('')}</div>
+   <div class="toolbar"><span>${fc.i+1} de ${fc.list.length}</span><button class="link" id="shuf">Mezclar</button></div>
+   <button class="panel card ${fc.flipped?'flipped':''}" id="card" aria-live="polite">
+     ${fc.flipped ? `<div class="back">${esc(c[2])}</div><div class="hint">Toca para volver</div>` : `<div class="front">${esc(c[1])}</div><div class="hint">Toca para ver la respuesta</div>`}
+   </button>
+   <div class="row"><button class="btn alt" id="prev">Anterior</button><button class="btn" id="nxt">Siguiente</button></div>`;
+  el.querySelectorAll('[data-deck]').forEach(b => b.onclick = () => loadDeck(b.dataset.deck, false));
+  $('#shuf').onclick = () => loadDeck(fc.deck, true);
+  $('#card').onclick = () => { fc.flipped = !fc.flipped; renderCards(); };
+  $('#prev').onclick = () => { fc.i = (fc.i - 1 + fc.list.length) % fc.list.length; fc.flipped = false; renderCards(); };
+  $('#nxt').onclick = () => { fc.i = (fc.i + 1) % fc.list.length; fc.flipped = false; renderCards(); };
+}
+
+/* ---------- RESUMEN ---------- */
+function renderSummary(){
+  $('#sum').innerHTML = SUM.map((s,i) => `<details ${i===0?'open':''}><summary>${s[0]}</summary><div class="body"><ul>${s[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></details>`).join('');
+}
+
+startQuiz(); loadDeck('pj', false); renderSummary();
+</script>
+</body>
+</html>
